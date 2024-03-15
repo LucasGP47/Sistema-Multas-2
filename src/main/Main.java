@@ -90,9 +90,7 @@ public class Main {
             }
         } else {
             boolean sair = false;
-
             System.out.println("Seja Bem Vindo " + name);
-
             while (!sair) {
                 System.out.println("Por favor, selecione a operação. 1) Consultar meus dados. 2) Situação da Carteira. 3) Veículos cadastrados. 4) Consultar Detalhes da Multa. 5) Sair");
 

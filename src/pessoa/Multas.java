@@ -195,9 +195,7 @@ public class Multas implements MultasService {
             return 0;
         }
     }
-
     
-   
     private double obterValorMultaSQL(String cpf, String placa) {
         try {
             Connection con = Conexao_SQL.run_connection();

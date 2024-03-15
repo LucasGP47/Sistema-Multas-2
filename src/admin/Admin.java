@@ -75,8 +75,7 @@ public class Admin implements AdminService {
             DocumentBuilder builder = factory.newDocumentBuilder();
             ByteArrayInputStream input = new ByteArrayInputStream(xmlContent.getBytes());
             Document doc = builder.parse(input);
-            doc.getDocumentElement().normalize();
-            
+            doc.getDocumentElement().normalize();          
             NodeList veiculosList = doc.getElementsByTagName("veiculo");
             boolean found = false;
             
@@ -103,7 +102,6 @@ public class Admin implements AdminService {
             System.out.println("Erro ao obter dados do veículo em XML.");
         }
     }
-
 
     private void consultarTabelasPorCPFJson(String cpf) {
         try {
@@ -205,23 +203,16 @@ public class Admin implements AdminService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String dataFormatada = formatter.format(dataAtual);
             multaElement.setAttribute("data_aplicacao", dataFormatada);
-            
-            // Obtendo o nó multas para adicionar a nova multa
             NodeList multasList = doc.getElementsByTagName("multas");
             Node multasNode = null;
             if (multasList.getLength() > 0) {
                 multasNode = multasList.item(0);
             } else {
-                // Se não houver nenhum nó multas, criamos um novo elemento multas
                 multasNode = doc.createElement("multas");
                 doc.getDocumentElement().appendChild(multasNode);
             }
-            
-            // Adicionando a nova multa ao nó multas
-            multasNode.appendChild(multaElement);
-            
-            xmlManager.writePersistencia(doc);
-            
+            multasNode.appendChild(multaElement);           
+            xmlManager.writePersistencia(doc);           
             System.out.println("Multa aplicada com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
